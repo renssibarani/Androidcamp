@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="16dp"
+    tools:context=".MainActivity">
+    <ImageView
+        android:layout_marginTop="12dp"
+        android:src="@drawable/ic_livin"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"/>
+
+    <LinearLayout
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:backgroundTint="#03A9F4"
+            android:src="@drawable/baseline_copyright_24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_marginLeft="4dp"
+            android:layout_gravity="center_vertical"
+            android:textSize="10sp"
+            android:textColor="#03A9F4"
+            android:text="Copyright by Mandiri"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+<!--    <TextView-->
+<!--        android:layout_marginTop="12dp"-->
+<!--        android:text="Input Your Number 1"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"/>-->
+<!--    <EditText-->
+<!--        android:inputType="number"-->
+<!--        android:layout_marginTop="12dp"-->
+<!--        android:id="@+id/etInputNumberOne"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"/>-->
+<!--    <TextView-->
+<!--        android:text="Input Your Number 2"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"/>-->
+<!--    <EditText-->
+<!--        android:inputType="number"-->
+<!--        android:layout_marginTop="12dp"-->
+<!--        android:id="@+id/etInputNumberTwo"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"/>-->
+
+<!--    <Button-->
+<!--        android:id="@+id/btnSubmit"-->
+<!--        android:layout_marginTop="12dp"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Submit" />    -->
+<!--    <Button-->
+<!--        android:backgroundTint="#2196F3"-->
+<!--        android:id="@+id/btnSubmit"-->
+<!--        android:layout_marginTop="12dp"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Login" />-->
+    <EditText
+        android:id="@+id/etInputUsername"
+        android:inputType="textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:id="@+id/llLogin"
+        android:background="@drawable/rounded_background"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:clickable="true"
+        >
+        <ImageView
+            android:src="@drawable/ic_barcode_scan"
+            android:layout_width="25dp"
+            android:layout_height="25dp"/>
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/white"
+            android:text="Login"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Register"/>
+    <TextView
+        android:id="@+id/tvErrorPassword"
+        android:textAlignment="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textColor="#C71C1C"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:text="Password salah, silahkan input password"/>
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+<!--        <TextView-->
+<!--            android:text="Hasilnya adalah : "-->
+<!--            android:id="@+id/tvResultTitle"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"/>-->
+<!--        <TextView-->
+<!--            android:layout_marginStart="4dp"-->
+<!--            android:id="@+id/tvResult"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"/>-->
+        <ImageView
+            android:layout_weight="1"
+            android:src="@drawable/ic_circle"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            />
+        <ImageView
+            android:layout_weight="1"
+            android:src="@drawable/ic_circle"
+            android:layout_marginLeft="10dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"/>
+        <ImageView
+            android:layout_weight="1"
+            android:src="@drawable/ic_circle"
+            android:layout_marginLeft="10dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"/>
+        <ImageView
+            android:layout_weight="1"
+            android:src="@drawable/ic_circle"
+            android:layout_marginLeft="10dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"/>
+        <ImageView
+            android:layout_weight="1"
+            android:src="@drawable/ic_circle"
+            android:layout_marginLeft="10dp"
+            android:layout_width="55dp"
+            android:layout_height="55dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:gravity="center"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_weight="1"
+            android:text="e-Money"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:text="Quick Pick"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:text="QR Bayar"
+            android:layout_width="55dp"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:text="QR Terima Transfer"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:text="Tap to Pay"
+            android:layout_width="63dp"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+</LinearLayout>
