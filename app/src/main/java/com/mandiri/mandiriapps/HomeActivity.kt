@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.mandiri.mandiriapps.adapter.EwalletAdapter
+import com.mandiri.mandiriapps.adapter.SavingDepositAdapter
 import com.mandiri.mandiriapps.databinding.ActivityHomeBinding
 import com.mandiri.mandiriapps.databinding.ItemEwalletBinding
 import com.mandiri.mandiriapps.model.EwalletModel
+import com.mandiri.mandiriapps.model.SavingDepositModel
 
 class HomeActivity: AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
@@ -17,7 +19,11 @@ class HomeActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setUpViewWallet()
+        setUpViewSavingDeposit()
 
+    }
+    private fun setUpViewWallet(){
         dummyEwalletList = createDummyEwalletList()
 
         binding.componentHomeEwallet.rvEwallet.adapter = ewalletAdapter
@@ -39,6 +45,39 @@ class HomeActivity: AppCompatActivity() {
             EwalletModel(name = "Ovo", image = R.drawable.ic_ovo, balance = 100000.0, isConnected = false),
             EwalletModel(name = "Dana", image = R.drawable.ic_dana, balance = 100000.0, isConnected = false),
             EwalletModel(name = "Ovo", image = R.drawable.ic_barcode, balance = 100000.0, isConnected = false)
+        )
+    }
+
+    private fun setUpViewSavingDeposit(){
+        binding.componentHomeSavingDeposit.rvSavingDeposit.adapter = SavingDepositAdapter(populateSavingDepositData())
+    }
+    private fun populateSavingDepositData(): MutableList<SavingDepositModel>{
+        return mutableListOf(
+            SavingDepositModel(
+                savingName = "Tabungan IDR NOW",
+                accountNumber = "17432748372478",
+                imageCard = R.drawable.ic_card_rek
+            ),
+            SavingDepositModel(
+                savingName = "Tabungan Nikah",
+                accountNumber = "17432748372478",
+                imageCard = R.drawable.ic_card_rek
+            ),
+            SavingDepositModel(
+                savingName = "Tabungan Rumah",
+                accountNumber = "17432748372478",
+                imageCard = R.drawable.ic_card_rek
+            ),
+            SavingDepositModel(
+                savingName = "Tabungan Jajan",
+                accountNumber = "17432748372478",
+                imageCard = R.drawable.ic_card_rek
+            ),
+            SavingDepositModel(
+                savingName = "Tabungan Anak",
+                accountNumber = "17432748372478",
+                imageCard = R.drawable.ic_card_rek
+            ),
         )
     }
 }
