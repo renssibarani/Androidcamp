@@ -12,14 +12,24 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isVisible
 import com.mandiri.mandiriapps.databinding.ActivityMainBinding
+import com.mandiri.mandiriapps.helper.SharedPref
+import java.util.UUID
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var sharedPref: SharedPref
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        sharedPref = SharedPref(this)
+
         binding=ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         handleLogin()
+
+        if (checkAvailableToken()){
+            handleTo(HomeActivity::class.java)
+        }
 
 
     }
@@ -36,6 +46,10 @@ class MainActivity : AppCompatActivity() {
 //                Toast.makeText(applicationContext, "Berhasil", Toast.LENGTH_SHORT).show()
                     handleVisibility(tvErrorPassword, false)
                     handleTo(HomeActivity::class.java)
+
+                    //shared preference
+                    val dummyToken = UUID.randomUUID().toString()
+                    sharedPref.saveToken(dummyToken)
                 }else{
                     showToast("Gagal")
 //                Toast.makeText(applicationContext, "Gagal", Toast.LENGTH_SHORT).show()
@@ -68,6 +82,10 @@ class MainActivity : AppCompatActivity() {
 //        button.setOnClickListener{
 //            Toast.makeText(applicationContext, "ini alert pertama saya", Toast.LENGTH_SHORT).show()
 //        }
+    }
+    private fun checkAvailableToken(): Boolean{
+        val token = sharedPref.getToken()
+        return token.isNotEmpty()
     }
     private fun showToast(message: String){
         Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
