@@ -28,7 +28,7 @@ class SavingDepositAdapter(
         )
     }
 
-    override fun getItemCount(): Int = if (savingDepositData.size>5) MAX_ITEM else savingDepositData.size
+    override fun getItemCount(): Int = if (savingDepositData.size>=5) MAX_ITEM else savingDepositData.size
     override fun onBindViewHolder(holder: SavingDepositViewHolder, position: Int) {
         holder.bind(savingDepositData[position])
     }
