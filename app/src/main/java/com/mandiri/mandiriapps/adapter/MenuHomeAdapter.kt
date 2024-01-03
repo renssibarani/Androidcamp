@@ -7,15 +7,15 @@ import com.mandiri.mandiriapps.databinding.ItemMenuHomeBinding
 import com.mandiri.mandiriapps.model.MenuModel
 
 class MenuHomeAdapter(
-    private val listMenu : List<MenuModel>
-) : RecyclerView.Adapter<MenuHomeAdapter.MenuViewHolder>(){
-    private var _onClickMenu: (MenuModel)->Unit={}
+    private val listMenu: List<MenuModel>
+) : RecyclerView.Adapter<MenuHomeAdapter.MenuViewHolder>() {
+    private var _onClickMenu: (MenuModel) -> Unit = {}
 
-    fun setOnClickMenu(listener: (MenuModel)-> Unit){
+    fun setOnClickMenu(listener: (MenuModel) -> Unit) {
         _onClickMenu = listener
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup,viewType: Int): MenuViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuViewHolder {
         return MenuViewHolder(
             ItemMenuHomeBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -34,10 +34,12 @@ class MenuHomeAdapter(
         return listMenu.size
     }
 
-    inner class MenuViewHolder(val binding: ItemMenuHomeBinding):RecyclerView.ViewHolder(binding.root){
-        fun bind(data: MenuModel, onClickMenu: (MenuModel) -> Unit){
+    inner class MenuViewHolder(val binding: ItemMenuHomeBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(data: MenuModel, onClickMenu: (MenuModel) -> Unit) {
             binding.tvTitleMenu.text = data.menuTitle
-            binding.constraintItemHome.setOnClickListener{
+            binding.ivMenuHome.setImageResource(data.image)
+            binding.constraintItemHome.setOnClickListener {
                 onClickMenu.invoke(data)
             }
         }

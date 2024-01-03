@@ -1,11 +1,11 @@
-package com.mandiri.mandiriapps
+package com.mandiri.mandiriapps.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.mandiri.mandiriapps.RegisterActivity.Companion.KEY_ALAMAT_VALUE
-import com.mandiri.mandiriapps.RegisterActivity.Companion.KEY_GENDER_VALUE
-import com.mandiri.mandiriapps.RegisterActivity.Companion.KEY_NAME_VALUE
-import com.mandiri.mandiriapps.RegisterActivity.Companion.KEY_UMUR_VALUE
+import com.mandiri.mandiriapps.presentation.RegisterActivity.Companion.KEY_ALAMAT_VALUE
+import com.mandiri.mandiriapps.presentation.RegisterActivity.Companion.KEY_GENDER_VALUE
+import com.mandiri.mandiriapps.presentation.RegisterActivity.Companion.KEY_NAME_VALUE
+import com.mandiri.mandiriapps.presentation.RegisterActivity.Companion.KEY_UMUR_VALUE
 import com.mandiri.mandiriapps.databinding.ActivityProfilBinding
 
 class ProfilActivity:AppCompatActivity() {

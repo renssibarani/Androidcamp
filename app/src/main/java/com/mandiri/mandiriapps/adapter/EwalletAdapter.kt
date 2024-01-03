@@ -11,12 +11,13 @@ class EwalletAdapter : RecyclerView.Adapter<EwalletAdapter.ViewHolder>() {
 
     private var listEwallet: MutableList<EwalletModel> = mutableListOf()
 
-    private var _onClickEwallet: (EwalletModel)->Unit={}
+    private var _onClickEwallet: (EwalletModel) -> Unit = {}
     fun setDataEwallet(data: MutableList<EwalletModel>) {
         this.listEwallet = data
         notifyDataSetChanged()
     }
-    fun setOnClickEwallet(listener: (EwalletModel)-> Unit){
+
+    fun setOnClickEwallet(listener: (EwalletModel) -> Unit) {
         _onClickEwallet = listener
     }
 
@@ -39,19 +40,19 @@ class EwalletAdapter : RecyclerView.Adapter<EwalletAdapter.ViewHolder>() {
 
     inner class ViewHolder(private val itemBinding: ItemEwalletBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
-        fun bind(ewallet: EwalletModel, onClickEwallet: (EwalletModel)->Unit) {
+        fun bind(ewallet: EwalletModel, onClickEwallet: (EwalletModel) -> Unit) {
 
-            if (ewallet.isConnected){
+            if (ewallet.isConnected) {
                 itemBinding.tvBalance.visibility = View.VISIBLE
                 itemBinding.vConnectAccount.visibility = View.GONE
-            }else{
+            } else {
                 itemBinding.tvBalance.visibility = View.GONE
                 itemBinding.vConnectAccount.visibility = View.VISIBLE
             }
 
             itemBinding.tvBalance.text = ewallet.balance.toString()
             itemBinding.ivImage.setImageResource(ewallet.image)
-            itemBinding.vConnectAccount.setOnClickListener{onClickEwallet.invoke(ewallet)}
+            itemBinding.vConnectAccount.setOnClickListener { onClickEwallet.invoke(ewallet) }
         }
     }
 }

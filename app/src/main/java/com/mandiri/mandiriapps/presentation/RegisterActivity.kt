@@ -1,4 +1,4 @@
-package com.mandiri.mandiriapps
+package com.mandiri.mandiriapps.presentation
 
 import android.content.Intent
 import android.os.Bundle
