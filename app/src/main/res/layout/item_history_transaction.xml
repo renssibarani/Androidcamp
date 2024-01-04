@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="16dp"
+    android:id="@+id/constraintItemTransaction">
+
+    <TextView
+        android:id="@+id/tvDateTransaction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="28 April 2024"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivLogoTrasaction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:src="@drawable/ic_in_transaction"
+        app:layout_constraintBottom_toBottomOf="@+id/tvSubtitleTransaction"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvSubtitleTransaction"
+
+        />
+
+    <TextView
+        android:id="@+id/tvTitleTransaction"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:text="Credit Trasaction"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/tvBalanceTrsaction"
+        app:layout_constraintStart_toEndOf="@id/ivLogoTrasaction"
+        app:layout_constraintTop_toBottomOf="@+id/tvDateTransaction" />
+
+    <TextView
+        android:id="@+id/tvSubtitleTransaction"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Transaction to BCA -Rens Sibarani"
+        app:layout_constraintEnd_toStartOf="@+id/tvBalanceTrsaction"
+        app:layout_constraintStart_toStartOf="@id/tvTitleTransaction"
+        app:layout_constraintTop_toBottomOf="@id/tvTitleTransaction" />
+
+    <TextView
+        android:id="@+id/statusTransaction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Berhasil"
+        android:layout_marginTop="8dp"
+        android:textColor="#4CAF50"
+        app:layout_constraintStart_toStartOf="@+id/tvSubtitleTransaction"
+        app:layout_constraintTop_toBottomOf="@+id/tvSubtitleTransaction" />
+
+    <TextView
+        android:id="@+id/tvBalanceTrsaction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rp 50.000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
