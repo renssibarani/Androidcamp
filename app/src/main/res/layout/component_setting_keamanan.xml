@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/tvInformasi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Keamanan"
+        android:textColor="#787474"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/ivLogoFAQ"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivLogoFAQ"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_biometrik"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvInformasi" />
+
+    <TextView
+        android:id="@+id/tvFAQ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:text="Biometrik untuk Login"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/ivLogoFAQ"
+        app:layout_constraintTop_toBottomOf="@+id/tvInformasi" />
+    <View
+        android:id="@+id/vSeparatorFAQ"
+        android:layout_marginTop="10dp"
+        android:background="#787474"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintTop_toBottomOf="@+id/ivLogoFAQ"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+    <ImageView
+        android:id="@+id/ivLogoTentang"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_email_blue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vSeparatorFAQ" />
+
+    <TextView
+        android:id="@+id/tvTentang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:text="PIN"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/ivLogoTentang"
+        app:layout_constraintTop_toBottomOf="@+id/vSeparatorFAQ" />
+    <View
+        android:id="@+id/vSeparatorPin"
+        android:layout_marginTop="10dp"
+        android:background="#787474"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintTop_toBottomOf="@+id/ivLogoTentang"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+    <ImageView
+        android:id="@+id/ivLogoPassword"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_bahasa_blue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vSeparatorPin" />
+    <TextView
+        android:id="@+id/tvPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:text="Password"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/ivLogoPassword"
+        app:layout_constraintTop_toBottomOf="@+id/vSeparatorPin" />
+    <View
+        android:id="@+id/vSeparatorPassword"
+        android:layout_marginTop="10dp"
+        android:background="#787474"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintTop_toBottomOf="@+id/ivLogoPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+    <ImageView
+        android:id="@+id/ivLogoTransaksi"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_email"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vSeparatorPassword" />
+    <TextView
+        android:id="@+id/tvTransaksi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:text="Transaksi Tanpa PIN"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/ivLogoTransaksi"
+        app:layout_constraintTop_toBottomOf="@+id/vSeparatorPassword" />
+    <View
+        android:id="@+id/vSeparatorTransaksi"
+        android:layout_marginTop="10dp"
+        android:background="#787474"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintTop_toBottomOf="@+id/ivLogoTransaksi"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+    <ImageView
+        android:id="@+id/ivLogoUbahNomor"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_email"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vSeparatorTransaksi" />
+    <TextView
+        android:id="@+id/tvUbahNomor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:text="Ubah Nomor Handphone"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/ivLogoTransaksi"
+        app:layout_constraintTop_toBottomOf="@+id/vSeparatorTransaksi" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

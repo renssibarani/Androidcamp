@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/tvInformasi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Informasi"
+        android:textColor="#787474"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/ivLogoFAQ"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivLogoFAQ"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_logout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvInformasi" />
+
+    <TextView
+        android:id="@+id/tvFAQ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:text="FAQ"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/ivLogoFAQ"
+        app:layout_constraintTop_toBottomOf="@+id/tvInformasi" />
+    <View
+        android:id="@+id/vSeparatorFAQ"
+        android:layout_marginTop="10dp"
+        android:background="#787474"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintTop_toBottomOf="@+id/ivLogoFAQ"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+    <ImageView
+        android:id="@+id/ivLogoTentang"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_email"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vSeparatorFAQ" />
+
+    <TextView
+        android:id="@+id/tvTentang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:text="Tentang Livin' by Mandiri"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/ivLogoTentang"
+        app:layout_constraintTop_toBottomOf="@+id/vSeparatorFAQ" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
