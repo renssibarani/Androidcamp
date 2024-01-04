@@ -1,0 +1,9 @@
+<!-- res/drawable/background_state.xml -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Ketika LinearLayout di-press -->
+    <item android:drawable="@color/grey" android:state_pressed="true"/>
+    <!-- Ketika LinearLayout di-hover (untuk perangkat dengan kemampuan hover, seperti TV) -->
+    <item android:drawable="@color/grey" android:state_hovered="true"/>
+    <!-- Default Background -->
+    <item android:drawable="@color/white"/>
+</selector>

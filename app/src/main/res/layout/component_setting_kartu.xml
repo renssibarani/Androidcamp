@@ -3,39 +3,48 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
-    android:padding="10dp">
+    android:layout_marginBottom="5dp"
+    android:background="@color/white">
 
     <TextView
-        android:id="@+id/tvInformasi"
+        android:id="@+id/tvKeamanan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:text="Kartu"
-        android:textColor="#787474"
+        android:textColor="@color/grey"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/ivLogoFAQ"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/ic_card_blue"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvInformasi" />
-
-    <TextView
-        android:id="@+id/tvFAQ"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
-        android:text="Kartu Debit &amp; Kartu Kredit"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/ivLogoFAQ"
-        app:layout_constraintTop_toBottomOf="@+id/tvInformasi" />
+        android:background="@drawable/background_hover"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="horizontal"
+        android:paddingStart="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvKeamanan">
+
+        <ImageView
+            android:id="@+id/ivLogoKartu"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_card_blue" />
+
+        <TextView
+            android:id="@+id/tvKartuDK"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:text="Kartu Debit &amp; Kartu Kredit"
+            android:textStyle="bold" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

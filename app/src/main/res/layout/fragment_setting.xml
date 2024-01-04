@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/constraintSetting"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#DACCC7C7">
+    android:background="@color/grey">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -18,42 +19,37 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <include layout="@layout/component_setting_login" />
+            <include layout="@layout/component_setting_search"
+                android:id="@+id/componentSettingSearch"
+                />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:background="@color/grey" />
-            <include
-                layout="@layout/component_setting_akun"/>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:background="@color/grey" />
-            <include
-                layout="@layout/component_setting_fitur"/>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:background="@color/grey" />
-            <include layout="@layout/component_setting_keamanan"/>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:background="@color/grey" />
-            <include layout="@layout/component_setting_kartu"/>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:background="@color/grey" />
-            <include
-                layout="@layout/component_setting_informasi"/>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:background="@color/grey" />
-            <include
-                layout="@layout/component_setting_logout"/>
+            <include layout="@layout/component_setting_login"
+                android:id="@+id/componentSettingLogin"
+                />
+
+            <include layout="@layout/component_setting_akun"
+                android:id="@+id/componentSettingAkun"
+                />
+
+            <include layout="@layout/component_setting_fitur"
+                android:id="@+id/componentSettingFitur"
+                />
+
+            <include layout="@layout/component_setting_keamanan"
+                android:id="@+id/componentSettingKeamanan"
+                />
+
+            <include layout="@layout/component_setting_kartu"
+                android:id="@+id/componentSettingKartu"
+                />
+
+            <include layout="@layout/component_setting_informasi"
+                android:id="@+id/componentSettingInformasi"
+                />
+
+            <include layout="@layout/component_setting_logout"
+                android:id="@+id/componentSettingLogout"
+                />
         </LinearLayout>
     </ScrollView>
 

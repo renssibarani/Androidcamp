@@ -3,97 +3,129 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
-    android:padding="10dp">
+    android:layout_marginBottom="5dp"
+    android:background="@color/white">
 
     <TextView
-        android:id="@+id/tvInformasi"
+        android:id="@+id/tvKeamanan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:text="Fitur"
-        android:textColor="#787474"
+        android:textColor="@color/grey"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/ivLogoFAQ"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/ivLogoFAQ"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/ic_logout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvInformasi" />
-
-    <TextView
-        android:id="@+id/tvFAQ"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/llBiometrik"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
-        android:text="Proxy untuk BI Fast"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/ivLogoFAQ"
-        app:layout_constraintTop_toBottomOf="@+id/tvInformasi" />
+        android:background="@drawable/background_hover"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="horizontal"
+        android:paddingStart="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvKeamanan">
+
+        <ImageView
+            android:id="@+id/ivLogoProxy"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_proxy_blue" />
+
+        <TextView
+            android:id="@+id/tvProxy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:text="Proxy untuk BI Fast"
+            android:textStyle="bold" />
+    </LinearLayout>
+
     <View
-        android:id="@+id/vSeparatorFAQ"
-        android:layout_marginTop="10dp"
-        android:background="#787474"
+        android:id="@+id/vSeparator1"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        app:layout_constraintTop_toBottomOf="@+id/ivLogoFAQ"
-        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/grey"
         app:layout_constraintEnd_toEndOf="parent"
-        />
-    <ImageView
-        android:id="@+id/ivLogoTentang"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/ic_email"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vSeparatorFAQ" />
+        app:layout_constraintTop_toBottomOf="@+id/llBiometrik" />
 
-    <TextView
-        android:id="@+id/tvTentang"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/llPIN"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
-        android:text="Sumber Dana QR Bayar"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/ivLogoTentang"
-        app:layout_constraintTop_toBottomOf="@+id/vSeparatorFAQ" />
+        android:background="@drawable/background_hover"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="horizontal"
+        android:paddingStart="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vSeparator1">
+
+        <ImageView
+            android:id="@+id/ivLogoEmail"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_sumber_dana" />
+
+        <TextView
+            android:id="@+id/tvEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:text="Email"
+            android:textStyle="bold" />
+    </LinearLayout>
+
     <View
-        android:id="@+id/vSeparatorPin"
-        android:layout_marginTop="10dp"
-        android:background="#787474"
+        android:id="@+id/vSeparator2"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        app:layout_constraintTop_toBottomOf="@+id/ivLogoTentang"
-        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/grey"
         app:layout_constraintEnd_toEndOf="parent"
-        />
-    <ImageView
-        android:id="@+id/ivLogoPassword"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/ic_logout"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vSeparatorPin" />
-    <TextView
-        android:id="@+id/tvPassword"
-        android:layout_width="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/llPIN" />
+
+    <LinearLayout
+        android:id="@+id/llPassword"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="10dp"
-        android:text="Terima Tagihan"
-        android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/ivLogoPassword"
-        app:layout_constraintTop_toBottomOf="@+id/vSeparatorPin" />
+        android:background="@drawable/background_hover"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="horizontal"
+        android:paddingStart="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vSeparator2">
 
+        <ImageView
+            android:id="@+id/ivLogoTerimaTagihan"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_bahasa_blue" />
 
+        <TextView
+            android:id="@+id/tvTerimaTagihan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:text="Terima Tagihan"
+            android:textStyle="bold" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
