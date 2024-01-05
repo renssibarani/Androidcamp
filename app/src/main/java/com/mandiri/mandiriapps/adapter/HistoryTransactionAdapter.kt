@@ -12,7 +12,7 @@ import com.mandiri.mandiriapps.model.StatusTransfer
 import com.mandiri.mandiriapps.model.statusTransaction
 
 class HistoryTransactionAdapter(
-    private val listTransaction: List<HistoryTransactionModel>,
+    private var listTransaction: List<HistoryTransactionModel>,
     private val onClickHistoryTransaction: (HistoryTransactionModel)-> Unit
 ): RecyclerView.Adapter<HistoryTransactionAdapter.TransactionHistoryViewHolder>() {
 inner class TransactionHistoryViewHolder(val binding: ItemHistoryTransactionBinding) :
@@ -66,6 +66,10 @@ inner class TransactionHistoryViewHolder(val binding: ItemHistoryTransactionBind
     }
 
     override fun getItemCount() = listTransaction.size
+    fun filterTransactionData(updateData:List<HistoryTransactionModel>){
+        this.listTransaction = updateData
+        notifyDataSetChanged()
+    }
 
     override fun onBindViewHolder(holder: TransactionHistoryViewHolder, position: Int) {
         holder.bind(listTransaction[position])

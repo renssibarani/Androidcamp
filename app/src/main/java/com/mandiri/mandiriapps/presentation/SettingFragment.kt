@@ -41,6 +41,5 @@ class SettingFragment:Fragment() {
     private fun logout() {
         sharedPref.clearDataPref()
         startActivity(Intent(requireContext(), LoginActivity::class.java))
-
     }
 }

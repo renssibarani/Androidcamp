@@ -1,5 +1,9 @@
 package com.mandiri.mandiriapps.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class HistoryTransactionModel(
     val date: String,
     val titleTrasaction: String,
@@ -7,7 +11,7 @@ data class HistoryTransactionModel(
     val iconTransaction: Int,
     val subtitleTrasaction: String,
     val statusTransaction: Int
-)
+): Parcelable
 
 enum class statusTransaction(val value: Int){
     Berhasil(1),
