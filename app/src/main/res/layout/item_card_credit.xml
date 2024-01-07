@@ -2,8 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/constraintItemCard">
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card1"
@@ -32,26 +31,25 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tvSavingDepositName"
+                    android:id="@+id/tvCreditTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tabungan NOW IDR"
+                    android:text="Mandiri SKYZ"
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/tvAccountNumber"
+                    android:id="@+id/tvCreditNumber"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="12345678912345678"
                     android:textColor="#808080" />
 
                 <TextView
-                    android:id="@+id/tvBalanceSavingDeposit"
+                    android:id="@+id/tvBalanceCredit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Rp 5.000.000.00"
-                    android:textStyle="bold"
-                    android:visibility="gone" />
+                    android:textStyle="bold"/>
 
             </LinearLayout>
 
@@ -61,7 +59,7 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="end"
                 android:adjustViewBounds="true"
-                android:src="@drawable/ic_card_rek"
+                android:src="@drawable/ic_credit_skyz"
                 app:layout_constraintEnd_toStartOf="parent" />
 
         </LinearLayout>

@@ -12,58 +12,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:text="Tabungan &amp; Deposito"
-        android:textStyle="bold"
+        android:text="Kartu Kredit"
         android:textColor="#1C43D5"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <LinearLayout
-        android:id="@+id/llBalanceHide"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toStartOf="@+id/llSettingSavingDeposit"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="20dp"
-            android:layout_marginEnd="5dp"
-            android:src="@drawable/ic_hide_eye" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Saldo"
-            android:textColor="#1C43D5" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/llBalanceOpen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal"
-        android:visibility="gone"
-        app:layout_constraintEnd_toStartOf="@id/llSettingSavingDeposit"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="20dp"
-            android:layout_marginEnd="5dp"
-            android:src="@drawable/ic_open_eye" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Saldo"
-            android:textColor="#1C43D5" />
-    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/llSettingSavingDeposit"
@@ -90,14 +43,14 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvSavingDeposit"
+        android:id="@+id/rvCreditCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/llTitleCreditCard"
-        tools:itemCount="4"
-        tools:listitem="@layout/item_saving_deposit" />
+        tools:itemCount="2"
+        tools:listitem="@layout/item_card_credit" />
 
     <LinearLayout
         android:id="@+id/llShowMore"
@@ -105,9 +58,10 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:orientation="vertical"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rvSavingDeposit">
+        app:layout_constraintTop_toBottomOf="@id/rvCreditCard">
 
         <TextView
             android:layout_width="wrap_content"
@@ -133,7 +87,7 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rvSavingDeposit">
+        app:layout_constraintTop_toBottomOf="@id/rvCreditCard">
 
         <ImageView
             android:layout_width="wrap_content"

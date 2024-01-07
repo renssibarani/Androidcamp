@@ -8,10 +8,12 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.mandiri.mandiriapps.R
+import com.mandiri.mandiriapps.adapter.CredirCardAdapter
 import com.mandiri.mandiriapps.adapter.EwalletAdapter
 import com.mandiri.mandiriapps.adapter.MenuHomeAdapter
 import com.mandiri.mandiriapps.adapter.SavingDepositAdapter
 import com.mandiri.mandiriapps.databinding.FragmenHomeBinding
+import com.mandiri.mandiriapps.model.CreditCardModel
 import com.mandiri.mandiriapps.model.EwalletModel
 import com.mandiri.mandiriapps.model.MenuModel
 import com.mandiri.mandiriapps.model.SavingDepositModel
@@ -22,6 +24,7 @@ class HomeFragment : Fragment() {
     private var ewalletAdapter = EwalletAdapter()
     private var dummyEwalletList: MutableList<EwalletModel>? = null
     private lateinit var savingDepositAdapter: SavingDepositAdapter
+    private lateinit var creditCardAdapter : CredirCardAdapter
     private lateinit var menuAdapter: MenuHomeAdapter
 
     override fun onCreateView(
@@ -37,6 +40,7 @@ class HomeFragment : Fragment() {
         setUpViewMenu()
         setUpViewWallet()
         setUpViewSavingDeposit()
+        setupViewCreditCard()
     }
 
     override fun onDestroyView() {
@@ -86,11 +90,16 @@ class HomeFragment : Fragment() {
             )
         )
     }
+    private fun setupViewCreditCard(){
+        creditCardAdapter = CredirCardAdapter(populateCredirCard())
+        binding.componentCreditCard.rvCreditCard.adapter = creditCardAdapter
 
+    }
     private fun setUpViewSavingDeposit() {
         savingDepositAdapter = SavingDepositAdapter(populateSavingDepositData())
         binding.componentHomeSavingDeposit.rvSavingDeposit.adapter = savingDepositAdapter
         updateSizeSavingDeposit(populateSavingDepositData())
+        updateHideOpenSavingDeposit()
     }
 
     private fun updateSizeSavingDeposit(data: MutableList<SavingDepositModel>) {
@@ -106,33 +115,73 @@ class HomeFragment : Fragment() {
             binding.componentHomeSavingDeposit.llShowLess.visibility = View.GONE
         }
     }
+    private fun toggleSavingDepositBalanceVisibility(isVisible: Boolean) {
+        for (i in 0 until savingDepositAdapter.itemCount) {
+            (binding.componentHomeSavingDeposit.rvSavingDeposit.findViewHolderForAdapterPosition(i) as? SavingDepositAdapter.SavingDepositViewHolder)?.setBalanceVisibility(isVisible)
+        }
+    }
+
+
+    private fun updateHideOpenSavingDeposit(){
+        binding.componentHomeSavingDeposit.llBalanceHide.setOnClickListener{
+            binding.componentHomeSavingDeposit.llBalanceHide.visibility = View.GONE
+            binding.componentHomeSavingDeposit.llBalanceOpen.visibility = View.VISIBLE
+            toggleSavingDepositBalanceVisibility(true)
+        }
+        binding.componentHomeSavingDeposit.llBalanceOpen.setOnClickListener{
+            binding.componentHomeSavingDeposit.llBalanceHide.visibility = View.VISIBLE
+            binding.componentHomeSavingDeposit.llBalanceOpen.visibility = View.GONE
+            toggleSavingDepositBalanceVisibility(false)
+        }
+    }
 
     private fun populateSavingDepositData(): MutableList<SavingDepositModel> {
         return mutableListOf(
             SavingDepositModel(
                 savingName = "Tabungan IDR NOW",
                 accountNumber = "17432748372478",
-                imageCard = R.drawable.ic_card_rek
+                imageCard = R.drawable.ic_gold_card,
+                balaceCard = "Rp 5.000.000.00"
             ),
             SavingDepositModel(
-                savingName = "Tabungan Nikah",
-                accountNumber = "17432748372478",
-                imageCard = R.drawable.ic_card_rek
+                savingName = "Tabungan Visa Gold",
+                accountNumber = "17432743785632",
+                imageCard = R.drawable.ic_gold_visa,
+                balaceCard = "Rp 4.000.000.00"
             ),
             SavingDepositModel(
-                savingName = "Tabungan Rumah",
-                accountNumber = "17432748372478",
-                imageCard = R.drawable.ic_card_rek
+                savingName = "Tabungan Silver GPN",
+                accountNumber = "17432748373245",
+                imageCard = R.drawable.ic_silver_card,
+                balaceCard = "Rp 6.000.000.00"
             ),
             SavingDepositModel(
-                savingName = "Tabungan Jajan",
-                accountNumber = "17432748372478",
-                imageCard = R.drawable.ic_card_rek
+                savingName = "Tabungan Gold GPN",
+                accountNumber = "17432748372389",
+                imageCard = R.drawable.ic_gold_card,
+                balaceCard = "Rp 7.000.000.00"
             ),
-            SavingDepositModel(
-                savingName = "Tabungan Anak",
-                accountNumber = "17432748372478",
-                imageCard = R.drawable.ic_card_rek
+        )
+    }
+
+    private fun populateCredirCard():List<CreditCardModel>{
+        return listOf(
+            CreditCardModel(
+                creditCardName = "Mandiri SKYZ",
+                accountCreditNumber = "23445653434223",
+                imageCard = R.drawable.ic_credit_skyz,
+                balanceCard = "Rp 4.500.000.00"
+            ),
+            CreditCardModel(
+                creditCardName = "Mandiri CORPORATE",
+                accountCreditNumber = "23445653434223",
+                imageCard = R.drawable.ic_credit_corporate,
+                balanceCard = "Rp 50.000.000.00"
+            ),CreditCardModel(
+                creditCardName = "Mandiri PRIORITAS",
+                accountCreditNumber = "23445653434223",
+                imageCard = R.drawable.ic_credit_priority,
+                balanceCard = "Rp 100.000.000.00"
             ),
         )
     }
