@@ -12,40 +12,33 @@ import com.mandiri.mandiriapps.adapter.CredirCardAdapter
 import com.mandiri.mandiriapps.adapter.EwalletAdapter
 import com.mandiri.mandiriapps.adapter.MenuHomeAdapter
 import com.mandiri.mandiriapps.adapter.SavingDepositAdapter
+import com.mandiri.mandiriapps.base.BaseFragment
 import com.mandiri.mandiriapps.databinding.FragmenHomeBinding
 import com.mandiri.mandiriapps.model.CreditCardModel
 import com.mandiri.mandiriapps.model.EwalletModel
 import com.mandiri.mandiriapps.model.MenuModel
 import com.mandiri.mandiriapps.model.SavingDepositModel
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment<FragmenHomeBinding>() {
     private var _binding: FragmenHomeBinding? = null
-    private val binding get() = _binding!!
+
     private var ewalletAdapter = EwalletAdapter()
     private var dummyEwalletList: MutableList<EwalletModel>? = null
     private lateinit var savingDepositAdapter: SavingDepositAdapter
-    private lateinit var creditCardAdapter : CredirCardAdapter
+    private lateinit var creditCardAdapter: CredirCardAdapter
     private lateinit var menuAdapter: MenuHomeAdapter
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmenHomeBinding.inflate(inflater, container, false)
-        return binding.root
+    override fun inflateBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmenHomeBinding {
+        return FragmenHomeBinding.inflate(inflater, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+    override fun setupView() {
         setUpViewMenu()
         setUpViewWallet()
         setUpViewSavingDeposit()
         setupViewCreditCard()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     private fun setUpViewWallet() {
@@ -90,11 +83,13 @@ class HomeFragment : Fragment() {
             )
         )
     }
-    private fun setupViewCreditCard(){
+
+    private fun setupViewCreditCard() {
         creditCardAdapter = CredirCardAdapter(populateCredirCard())
         binding.componentCreditCard.rvCreditCard.adapter = creditCardAdapter
 
     }
+
     private fun setUpViewSavingDeposit() {
         savingDepositAdapter = SavingDepositAdapter(populateSavingDepositData())
         binding.componentHomeSavingDeposit.rvSavingDeposit.adapter = savingDepositAdapter
@@ -115,20 +110,22 @@ class HomeFragment : Fragment() {
             binding.componentHomeSavingDeposit.llShowLess.visibility = View.GONE
         }
     }
+
     private fun toggleSavingDepositBalanceVisibility(isVisible: Boolean) {
         for (i in 0 until savingDepositAdapter.itemCount) {
-            (binding.componentHomeSavingDeposit.rvSavingDeposit.findViewHolderForAdapterPosition(i) as? SavingDepositAdapter.SavingDepositViewHolder)?.setBalanceVisibility(isVisible)
+            (binding.componentHomeSavingDeposit.rvSavingDeposit.findViewHolderForAdapterPosition(i) as? SavingDepositAdapter.SavingDepositViewHolder)?.setBalanceVisibility(
+                isVisible
+            )
         }
     }
 
-
-    private fun updateHideOpenSavingDeposit(){
-        binding.componentHomeSavingDeposit.llBalanceHide.setOnClickListener{
+    private fun updateHideOpenSavingDeposit() {
+        binding.componentHomeSavingDeposit.llBalanceHide.setOnClickListener {
             binding.componentHomeSavingDeposit.llBalanceHide.visibility = View.GONE
             binding.componentHomeSavingDeposit.llBalanceOpen.visibility = View.VISIBLE
             toggleSavingDepositBalanceVisibility(true)
         }
-        binding.componentHomeSavingDeposit.llBalanceOpen.setOnClickListener{
+        binding.componentHomeSavingDeposit.llBalanceOpen.setOnClickListener {
             binding.componentHomeSavingDeposit.llBalanceHide.visibility = View.VISIBLE
             binding.componentHomeSavingDeposit.llBalanceOpen.visibility = View.GONE
             toggleSavingDepositBalanceVisibility(false)
@@ -164,7 +161,7 @@ class HomeFragment : Fragment() {
         )
     }
 
-    private fun populateCredirCard():List<CreditCardModel>{
+    private fun populateCredirCard(): List<CreditCardModel> {
         return listOf(
             CreditCardModel(
                 creditCardName = "Mandiri SKYZ",
@@ -177,7 +174,8 @@ class HomeFragment : Fragment() {
                 accountCreditNumber = "23445653434223",
                 imageCard = R.drawable.ic_credit_corporate,
                 balanceCard = "Rp 50.000.000.00"
-            ),CreditCardModel(
+            ),
+            CreditCardModel(
                 creditCardName = "Mandiri PRIORITAS",
                 accountCreditNumber = "23445653434223",
                 imageCard = R.drawable.ic_credit_priority,

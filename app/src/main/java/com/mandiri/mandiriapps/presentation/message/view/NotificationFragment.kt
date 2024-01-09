@@ -5,32 +5,38 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.mandiri.mandiriapps.adapter.NotificationAdapter
+import com.mandiri.mandiriapps.base.BaseFragment
 import com.mandiri.mandiriapps.databinding.FragmentNotificationBinding
 import com.mandiri.mandiriapps.model.NotificationModel
+import com.mandiri.mandiriapps.presentation.viewmodel.NotificationViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-class NotificationFragment  : Fragment(){
-    private var _binding : FragmentNotificationBinding? = null
-    private val binding get() = _binding!!
-    override fun onCreateView(
+@AndroidEntryPoint
+class NotificationFragment : BaseFragment<FragmentNotificationBinding>() {
+    private val viewModel: NotificationViewModel by viewModels()
+    private var _binding: FragmentNotificationBinding? = null
+    override fun inflateBinding(
         inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentNotificationBinding.inflate(inflater, container, false)
-        return binding.root
+        container: ViewGroup?
+    ): FragmentNotificationBinding {
+        return FragmentNotificationBinding.inflate(inflater, container, false)
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    override fun setupView() {
+        viewModel.setNotificationData(populateDateNotification())
+        observeViewModel()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding.rvNotification.adapter = NotificationAdapter(
-            populateDateNotification()
-        )
+    private fun observeViewModel(){
+        viewModel.notificationData.observe(viewLifecycleOwner){
+            setNotificationData(it)
+        }
+    }
+
+    private fun setNotificationData(data: List<NotificationModel>){
+        binding.rvNotification.adapter = NotificationAdapter(data)
     }
 
 

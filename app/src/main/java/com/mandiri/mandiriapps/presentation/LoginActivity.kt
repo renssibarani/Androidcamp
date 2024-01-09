@@ -7,16 +7,20 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
 import com.mandiri.mandiriapps.databinding.ActivityLoginBinding
-import com.mandiri.mandiriapps.helper.SharedPref
+import com.mandiri.mandiriapps.helper.SharedPrefHelper
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.UUID
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
-    private lateinit var sharedPref: SharedPref
+    @Inject
+    lateinit var sharedPrefHelper: SharedPrefHelper
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        sharedPref = SharedPref(this)
 
         binding=ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -44,7 +48,7 @@ class LoginActivity : AppCompatActivity() {
 
                     //shared preference
                     val dummyToken = UUID.randomUUID().toString()
-                    sharedPref.saveToken(dummyToken)
+                    sharedPrefHelper.saveToken(dummyToken)
                 }else{
                     showToast("Gagal")
 //                Toast.makeText(applicationContext, "Gagal", Toast.LENGTH_SHORT).show()
@@ -79,7 +83,7 @@ class LoginActivity : AppCompatActivity() {
 //        }
     }
     private fun checkAvailableToken(): Boolean{
-        val token = sharedPref.getToken()
+        val token = sharedPrefHelper.getToken()
         return token.isNotEmpty()
     }
     private fun showToast(message: String){

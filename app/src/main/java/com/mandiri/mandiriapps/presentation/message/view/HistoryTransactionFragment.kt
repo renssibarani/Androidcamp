@@ -11,28 +11,28 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.mandiri.mandiriapps.R
 import com.mandiri.mandiriapps.adapter.HistoryTransactionAdapter
+import com.mandiri.mandiriapps.base.BaseFragment
 import com.mandiri.mandiriapps.databinding.FragmentHistoryTrasactionBinding
 import com.mandiri.mandiriapps.databinding.FragmentNotificationBinding
 import com.mandiri.mandiriapps.model.HistoryTransactionModel
+import com.mandiri.mandiriapps.model.StatusTransfer
+import com.mandiri.mandiriapps.model.statusTransaction
+import com.mandiri.mandiriapps.utils.ConfirmationDialogUtil
 
-class HistoryTransactionFragment : Fragment() {
+class HistoryTransactionFragment : BaseFragment<FragmentHistoryTrasactionBinding>() {
     private var _historyAdapter: HistoryTransactionAdapter? = null
     private var _historyTransactionData: List<HistoryTransactionModel>? = null
     private var _binding: FragmentHistoryTrasactionBinding? = null
-    private val binding get() = _binding!!
-    override fun onCreateView(
+    override fun inflateBinding(
         inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentHistoryTrasactionBinding.inflate(inflater, container, false)
-
-        return binding.root
+        container: ViewGroup?
+    ): FragmentHistoryTrasactionBinding {
+        return FragmentHistoryTrasactionBinding.inflate(inflater, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun setupView() {
         setupViewHistoryTransaction()
+
 
         val items = arrayOf("Semua", "Debit", "Credit")
         binding.spFilterTransaction.adapter =
@@ -54,9 +54,9 @@ class HistoryTransactionFragment : Fragment() {
                     binding.tvFilter.text = spinnerValue
 //                    Toast.makeText(requireContext(), spinnerValue, Toast.LENGTH_SHORT).show()
 
-                    if (position==0) {
+                    if (position == 0) {
                         _historyAdapter?.filterTransactionData(populateDataHistoryTransaction())
-                    }else{
+                    } else {
                         populateDataHistoryTransaction().filter {
                             it.titleTrasaction.equals(
                                 spinnerValue
@@ -71,23 +71,17 @@ class HistoryTransactionFragment : Fragment() {
                 }
 
             }
-
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+    private lateinit var confirmationDialogUtil: ConfirmationDialogUtil
+
 
     private fun setupViewHistoryTransaction() {
         _historyTransactionData = populateDataHistoryTransaction()
         _historyAdapter = HistoryTransactionAdapter(
             listTransaction = populateDataHistoryTransaction(),
             onClickHistoryTransaction = {
-                DetailTransactionActivity.navigateToDetailTransaction(
-                    activity = requireActivity(),
-                    data = it
-                )
+                showConfirmation(it)
             }
         )
         binding.rvTransaction.adapter = _historyAdapter
@@ -98,6 +92,38 @@ class HistoryTransactionFragment : Fragment() {
 //        intent.putExtra("", data)
 //        startActivity(intent)
 //    }
+    private fun showConfirmation(data: HistoryTransactionModel) {
+        ConfirmationDialogUtil(requireContext()).showConfirmationDialog(
+            title = data.titleTrasaction,
+            icon = checkIconForDialog(data),
+            onConfirm = {
+                DetailTransactionActivity.navigateToDetailTransaction(
+                    activity = requireActivity(),
+                    data = data
+                )
+            },
+            onCancle = {
+
+            }
+        )
+    }
+
+    private fun checkIconForDialog(data: HistoryTransactionModel): Int {
+        return when (data.titleTrasaction) {
+            StatusTransfer.Debit.value -> {
+                R.drawable.ic_in_transaction
+            }
+
+            StatusTransfer.Credit.value -> {
+                R.drawable.ic_out
+            }
+
+            else -> {
+                R.drawable.ic_in_transaction
+            }
+        }
+    }
+
     private fun populateDataHistoryTransaction(): List<HistoryTransactionModel> {
         return listOf(
             HistoryTransactionModel(
