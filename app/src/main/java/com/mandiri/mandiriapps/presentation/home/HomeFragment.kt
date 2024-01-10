@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.mandiri.mandiriapps.R
 import com.mandiri.mandiriapps.adapter.CredirCardAdapter
 import com.mandiri.mandiriapps.adapter.EwalletAdapter
@@ -18,10 +19,11 @@ import com.mandiri.mandiriapps.model.CreditCardModel
 import com.mandiri.mandiriapps.model.EwalletModel
 import com.mandiri.mandiriapps.model.MenuModel
 import com.mandiri.mandiriapps.model.SavingDepositModel
+import com.mandiri.mandiriapps.presentation.home.viewmodel.HomeViewModel
+import com.mandiri.mandiriapps.presentation.viewmodel.NotificationViewModel
 
 class HomeFragment : BaseFragment<FragmenHomeBinding>() {
-    private var _binding: FragmenHomeBinding? = null
-
+    private val viewModel: HomeViewModel by viewModels()
     private var ewalletAdapter = EwalletAdapter()
     private var dummyEwalletList: MutableList<EwalletModel>? = null
     private lateinit var savingDepositAdapter: SavingDepositAdapter
@@ -35,14 +37,15 @@ class HomeFragment : BaseFragment<FragmenHomeBinding>() {
     }
 
     override fun setupView() {
-        setUpViewMenu()
-        setUpViewWallet()
-        setUpViewSavingDeposit()
-        setupViewCreditCard()
+        viewModel.setMenuHomeData()
+        viewModel.setEwalletData()
+        viewModel.setSavingDepositData()
+        viewModel.setCreditCardData()
+        observeViewModel()
     }
 
-    private fun setUpViewWallet() {
-        dummyEwalletList = createDummyEwalletList()
+    private fun setUpViewWallet(data: MutableList<EwalletModel>) {
+        dummyEwalletList = data
 
         binding.componentHomeEwallet.rvEwallet.adapter = ewalletAdapter
         ewalletAdapter.setDataEwallet(dummyEwalletList ?: mutableListOf())
@@ -57,46 +60,40 @@ class HomeFragment : BaseFragment<FragmenHomeBinding>() {
         }
     }
 
-    private fun createDummyEwalletList(): MutableList<EwalletModel> {
-        return mutableListOf(
-            EwalletModel(
-                name = "Gopay", image = R.drawable.ic_gopay, balance = 100000.0, isConnected = true
-            ), EwalletModel(
-                name = "Shopee",
-                image = R.drawable.ic_barcode,
-                balance = 100000.0,
-                isConnected = false
-            ), EwalletModel(
-                name = "LinkAja",
-                image = R.drawable.ic_linkaja,
-                balance = 100000.0,
-                isConnected = false
-            ), EwalletModel(
-                name = "Ovo", image = R.drawable.ic_ovo, balance = 100000.0, isConnected = false
-            ), EwalletModel(
-                name = "Dana", image = R.drawable.ic_dana, balance = 100000.0, isConnected = false
-            ), EwalletModel(
-                name = "AstraPay",
-                image = R.drawable.ic_barcode,
-                balance = 100000.0,
-                isConnected = false
-            )
-        )
+    private fun observeViewModel() {
+        viewModel.ewalletData.observe(viewLifecycleOwner) {
+            setUpViewWallet(it)
+        }
+        viewModel.savingDepositData.observe(viewLifecycleOwner) {
+            setUpViewSavingDeposit(it)
+        }
+        viewModel.creditCardData.observe(viewLifecycleOwner){
+            setupViewCreditCard(it)
+        }
+        viewModel.menuHomeData.observe(viewLifecycleOwner){
+            setUpViewMenu(it)
+        }
     }
 
-    private fun setupViewCreditCard() {
-        creditCardAdapter = CredirCardAdapter(populateCredirCard())
+    private fun setupViewCreditCard(data: List<CreditCardModel>) {
+        creditCardAdapter = CredirCardAdapter(data)
         binding.componentCreditCard.rvCreditCard.adapter = creditCardAdapter
 
     }
-
-    private fun setUpViewSavingDeposit() {
-        savingDepositAdapter = SavingDepositAdapter(populateSavingDepositData())
+    private fun setUpViewSavingDeposit(data: MutableList<SavingDepositModel>) {
+        savingDepositAdapter = SavingDepositAdapter(data)
         binding.componentHomeSavingDeposit.rvSavingDeposit.adapter = savingDepositAdapter
-        updateSizeSavingDeposit(populateSavingDepositData())
+        updateSizeSavingDeposit(data)
         updateHideOpenSavingDeposit()
     }
+    private fun setUpViewMenu(data: List<MenuModel>) {
+        menuAdapter = MenuHomeAdapter(data)
+        binding.componentMenuHome.gridHome.adapter = menuAdapter
 
+        menuAdapter.setOnClickMenu {
+            Toast.makeText(context, "${it.menuTitle}", Toast.LENGTH_SHORT).show()
+        }
+    }
     private fun updateSizeSavingDeposit(data: MutableList<SavingDepositModel>) {
         binding.componentHomeSavingDeposit.llShowMore.isVisible = data.size > 2
         binding.componentHomeSavingDeposit.llShowMore.setOnClickListener {
@@ -113,7 +110,9 @@ class HomeFragment : BaseFragment<FragmenHomeBinding>() {
 
     private fun toggleSavingDepositBalanceVisibility(isVisible: Boolean) {
         for (i in 0 until savingDepositAdapter.itemCount) {
-            (binding.componentHomeSavingDeposit.rvSavingDeposit.findViewHolderForAdapterPosition(i) as? SavingDepositAdapter.SavingDepositViewHolder)?.setBalanceVisibility(
+            (binding.componentHomeSavingDeposit.rvSavingDeposit.findViewHolderForAdapterPosition(
+                i
+            ) as? SavingDepositAdapter.SavingDepositViewHolder)?.setBalanceVisibility(
                 isVisible
             )
         }
@@ -132,90 +131,6 @@ class HomeFragment : BaseFragment<FragmenHomeBinding>() {
         }
     }
 
-    private fun populateSavingDepositData(): MutableList<SavingDepositModel> {
-        return mutableListOf(
-            SavingDepositModel(
-                savingName = "Tabungan IDR NOW",
-                accountNumber = "17432748372478",
-                imageCard = R.drawable.ic_gold_card,
-                balaceCard = "Rp 5.000.000.00"
-            ),
-            SavingDepositModel(
-                savingName = "Tabungan Visa Gold",
-                accountNumber = "17432743785632",
-                imageCard = R.drawable.ic_gold_visa,
-                balaceCard = "Rp 4.000.000.00"
-            ),
-            SavingDepositModel(
-                savingName = "Tabungan Silver GPN",
-                accountNumber = "17432748373245",
-                imageCard = R.drawable.ic_silver_card,
-                balaceCard = "Rp 6.000.000.00"
-            ),
-            SavingDepositModel(
-                savingName = "Tabungan Gold GPN",
-                accountNumber = "17432748372389",
-                imageCard = R.drawable.ic_gold_card,
-                balaceCard = "Rp 7.000.000.00"
-            ),
-        )
-    }
-
-    private fun populateCredirCard(): List<CreditCardModel> {
-        return listOf(
-            CreditCardModel(
-                creditCardName = "Mandiri SKYZ",
-                accountCreditNumber = "23445653434223",
-                imageCard = R.drawable.ic_credit_skyz,
-                balanceCard = "Rp 4.500.000.00"
-            ),
-            CreditCardModel(
-                creditCardName = "Mandiri CORPORATE",
-                accountCreditNumber = "23445653434223",
-                imageCard = R.drawable.ic_credit_corporate,
-                balanceCard = "Rp 50.000.000.00"
-            ),
-            CreditCardModel(
-                creditCardName = "Mandiri PRIORITAS",
-                accountCreditNumber = "23445653434223",
-                imageCard = R.drawable.ic_credit_priority,
-                balanceCard = "Rp 100.000.000.00"
-            ),
-        )
-    }
-
-    private fun populateDataMenuHome(): List<MenuModel> {
-        return listOf(
-            MenuModel(
-                image = R.drawable.ic_transfer, menuTitle = "Transfer"
-            ), MenuModel(
-                image = R.drawable.ic_zakat, menuTitle = "Donasi"
-            ), MenuModel(
-                image = R.drawable.ic_qr, menuTitle = "QR"
-            ), MenuModel(
-                image = R.drawable.ic_zakat, menuTitle = "Zakat"
-            ), MenuModel(
-                image = R.drawable.ic_barcode_scan, menuTitle = "Cashsles"
-            ), MenuModel(
-                image = R.drawable.ic_ewallet, menuTitle = "E-Wallet"
-            ), MenuModel(
-                image = R.drawable.ic_tarik, menuTitle = "Tarik"
-            ), MenuModel(
-                image = R.drawable.ic_zakat, menuTitle = "Bayar"
-            ), MenuModel(
-                image = R.drawable.ic_setor, menuTitle = "Setor"
-            )
-        )
-    }
-
-    private fun setUpViewMenu() {
-        menuAdapter = MenuHomeAdapter(populateDataMenuHome())
-        binding.componentMenuHome.gridHome.adapter = menuAdapter
-
-        menuAdapter.setOnClickMenu {
-            Toast.makeText(context, "${it.menuTitle}", Toast.LENGTH_SHORT).show()
-        }
-    }
 
 
 }

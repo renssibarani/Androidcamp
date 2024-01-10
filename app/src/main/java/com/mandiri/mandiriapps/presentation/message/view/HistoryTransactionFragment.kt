@@ -9,6 +9,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.mandiri.mandiriapps.R
 import com.mandiri.mandiriapps.adapter.HistoryTransactionAdapter
 import com.mandiri.mandiriapps.base.BaseFragment
@@ -17,12 +18,16 @@ import com.mandiri.mandiriapps.databinding.FragmentNotificationBinding
 import com.mandiri.mandiriapps.model.HistoryTransactionModel
 import com.mandiri.mandiriapps.model.StatusTransfer
 import com.mandiri.mandiriapps.model.statusTransaction
+import com.mandiri.mandiriapps.presentation.viewmodel.HistoryTransactionViewModel
 import com.mandiri.mandiriapps.utils.ConfirmationDialogUtil
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HistoryTransactionFragment : BaseFragment<FragmentHistoryTrasactionBinding>() {
     private var _historyAdapter: HistoryTransactionAdapter? = null
     private var _historyTransactionData: List<HistoryTransactionModel>? = null
-    private var _binding: FragmentHistoryTrasactionBinding? = null
+
+    private val viewModel: HistoryTransactionViewModel by viewModels()
     override fun inflateBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -31,7 +36,8 @@ class HistoryTransactionFragment : BaseFragment<FragmentHistoryTrasactionBinding
     }
 
     override fun setupView() {
-        setupViewHistoryTransaction()
+        viewModel.setHistoryTransactionData()
+        observeViewModel()
 
 
         val items = arrayOf("Semua", "Debit", "Credit")
@@ -55,13 +61,15 @@ class HistoryTransactionFragment : BaseFragment<FragmentHistoryTrasactionBinding
 //                    Toast.makeText(requireContext(), spinnerValue, Toast.LENGTH_SHORT).show()
 
                     if (position == 0) {
-                        _historyAdapter?.filterTransactionData(populateDataHistoryTransaction())
+                        viewModel.historyTransactionData.value?.let {
+                            _historyAdapter?.filterTransactionData(it)
+                        }
                     } else {
-                        populateDataHistoryTransaction().filter {
+                        viewModel.historyTransactionData.value?.filter {
                             it.titleTrasaction.equals(
                                 spinnerValue
                             )
-                        }.also { historyData ->
+                        }?.also { historyData ->
                             _historyAdapter?.filterTransactionData(historyData)
                         }
                     }
@@ -74,12 +82,16 @@ class HistoryTransactionFragment : BaseFragment<FragmentHistoryTrasactionBinding
     }
 
     private lateinit var confirmationDialogUtil: ConfirmationDialogUtil
+    private fun observeViewModel() {
+        viewModel.historyTransactionData.observe(viewLifecycleOwner) {
+            setupViewHistoryTransaction(it)
+        }
+    }
 
-
-    private fun setupViewHistoryTransaction() {
-        _historyTransactionData = populateDataHistoryTransaction()
+    private fun setupViewHistoryTransaction(data: List<HistoryTransactionModel>) {
+        _historyTransactionData = data
         _historyAdapter = HistoryTransactionAdapter(
-            listTransaction = populateDataHistoryTransaction(),
+            listTransaction = data,
             onClickHistoryTransaction = {
                 showConfirmation(it)
             }
@@ -87,11 +99,6 @@ class HistoryTransactionFragment : BaseFragment<FragmentHistoryTrasactionBinding
         binding.rvTransaction.adapter = _historyAdapter
     }
 
-    //    private fun navigateToDetailHistory(data: HistoryTransactionModel){
-//        val intent = Intent(context, DetailTransactionActivity::class.java)
-//        intent.putExtra("", data)
-//        startActivity(intent)
-//    }
     private fun showConfirmation(data: HistoryTransactionModel) {
         ConfirmationDialogUtil(requireContext()).showConfirmationDialog(
             title = data.titleTrasaction,
@@ -124,56 +131,4 @@ class HistoryTransactionFragment : BaseFragment<FragmentHistoryTrasactionBinding
         }
     }
 
-    private fun populateDataHistoryTransaction(): List<HistoryTransactionModel> {
-        return listOf(
-            HistoryTransactionModel(
-                date = "24 Januari 2024",
-                titleTrasaction = "Debit",
-                subtitleTrasaction = "Transfer Mandiri -Tiara",
-                balanceTrasaction = "Rp 200.000",
-                iconTransaction = R.drawable.ic_in_transaction,
-                statusTransaction = 1
-            ),
-            HistoryTransactionModel(
-                date = "24 Januari 2024",
-                titleTrasaction = "Credit",
-                subtitleTrasaction = "Transfer Mandiri -Rens",
-                balanceTrasaction = "Rp 100.000",
-                iconTransaction = R.drawable.ic_in_transaction,
-                statusTransaction = 3
-            ),
-            HistoryTransactionModel(
-                date = "24 Januari 2024",
-                titleTrasaction = "Debit",
-                subtitleTrasaction = "Transfer Mandiri -Tiara",
-                balanceTrasaction = "Rp 200.000",
-                iconTransaction = R.drawable.ic_in_transaction,
-                statusTransaction = 2
-            ),
-            HistoryTransactionModel(
-                date = "24 Januari 2024",
-                titleTrasaction = "Credit",
-                subtitleTrasaction = "Transfer Mandiri -Rens",
-                balanceTrasaction = "Rp 100.000",
-                iconTransaction = R.drawable.ic_in_transaction,
-                statusTransaction = 1
-            ),
-            HistoryTransactionModel(
-                date = "24 Januari 2024",
-                titleTrasaction = "Debit",
-                subtitleTrasaction = "Transfer Mandiri -Tiara",
-                balanceTrasaction = "Rp 200.000",
-                iconTransaction = R.drawable.ic_in_transaction,
-                statusTransaction = 2
-            ),
-            HistoryTransactionModel(
-                date = "24 Januari 2024",
-                titleTrasaction = "Credit",
-                subtitleTrasaction = "Transfer Mandiri -Rens",
-                balanceTrasaction = "Rp 100.000",
-                iconTransaction = R.drawable.ic_in_transaction,
-                statusTransaction = 3
-            )
-        )
-    }
 }
